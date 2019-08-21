@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chineseColorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewForList"
+        android:layout_width="240dp"
+        android:layout_height="731dp"
+        android:background="@android:color/transparent"
+        android:scrollbars="none"
+        tools:layout_editor_absoluteX="5dp" />
+
+    <TextView
+        android:id="@+id/select_color_text"
+        android:layout_width="40dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:ems="1"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.805"
+        app:layout_constraintStart_toEndOf="@+id/recyclerViewForList"
+        app:layout_constraintTop_toTopOf="@+id/recyclerViewForList"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/select_color_pinyin_text"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/listCView"
+        app:layout_constraintTop_toBottomOf="@+id/select_color_text"
+        app:layout_constraintVertical_bias="0.106" />
+
+    <com.willxing.chinesecolors.custom.ListCView
+        android:id="@+id/listCView"
+        android:layout_width="35dp"
+        android:layout_height="350dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/select_color_text"
+        app:layout_constraintHorizontal_bias="0.307"
+        app:layout_constraintStart_toEndOf="@+id/recyclerViewForList"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.02" />
+
+    <com.willxing.chinesecolors.custom.ScrollTextView
+        android:id="@+id/scrolltext_r"
+        android:layout_width="35dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/listCView"
+        app:layout_constraintTop_toTopOf="@+id/listCView"
+        app:layout_constraintVertical_bias="0.420" />
+
+    <com.willxing.chinesecolors.custom.ScrollTextView
+        android:id="@+id/scrolltext_g"
+        android:layout_width="35dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/listCView"
+        app:layout_constraintTop_toBottomOf="@+id/scrolltext_r"
+        app:layout_constraintVertical_bias="0.060" />
+
+    <com.willxing.chinesecolors.custom.ScrollTextView
+        android:id="@+id/scrolltext_b"
+        android:layout_width="35dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/listCView"
+        app:layout_constraintTop_toBottomOf="@+id/scrolltext_g"
+        app:layout_constraintVertical_bias="0.060" />
+
+</android.support.constraint.ConstraintLayout>
