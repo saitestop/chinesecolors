@@ -3,6 +3,7 @@ package com.willxing.chinesecolors
 import android.animation.*
 import android.app.Activity
 import android.content.res.AssetManager
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
@@ -46,10 +47,23 @@ class MainActivity : Activity() {
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+//         if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+             setContentView(R.layout.activity_main)
+//         }else{
+//             setContentView(R.layout.activity_main_landscape)
+//         }
         initView()
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+             setContentView(R.layout.activity_main)
+         }else{
+            setContentView(R.layout.activity_main_landscape)
+         }
+        initView()
+    }
 
     private fun initView() {
         scrollTextView_r = findViewById(R.id.scrolltext_r)

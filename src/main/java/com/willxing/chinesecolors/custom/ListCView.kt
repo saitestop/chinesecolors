@@ -1,6 +1,7 @@
 package com.willxing.chinesecolors.custom
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
@@ -33,13 +34,16 @@ class ListCView : View {
     //如果未设置半径，则半径的值为view的宽、高一半的较小值
     var mRadius: Float = 0f
 
+    var portrait = true
+
     constructor(mContext: Context) : super(mContext) {
         initPaint()
-
+        checkOrientation()
     }
 
     constructor(mContext: Context, mAttributeSet: AttributeSet) : super(mContext, mAttributeSet) {
         initPaint()
+        checkOrientation()
     }
 
     fun initPaint() {
@@ -54,7 +58,16 @@ class ListCView : View {
         val heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec)
         setMeasuredDimension(widthSpecSize, heightSpecSize)
 
+    }
 
+    fun checkOrientation(){
+        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            //竖屏
+            portrait = true
+        } else {
+            //横屏
+            portrait = false
+        }
     }
 
     fun initCircle() {
