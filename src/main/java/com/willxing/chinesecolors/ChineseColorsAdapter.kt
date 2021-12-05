@@ -1,11 +1,11 @@
 package com.willxing.chinesecolors
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.willxing.chinesecolors.bean.ColorData
 import com.willxing.chinesecolors.custom.RoundView
 
@@ -50,7 +50,7 @@ class ChineseColorsAdapter(private val context:Context,private val data:List<Col
 
 
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): ChineseColorsAdapter.ColorViewHolder {
+                                    viewType: Int): ColorViewHolder {
         val layout = LayoutInflater.from(parent.context)
                 .inflate(R.layout.color_item, parent, false) as ConstraintLayout
 

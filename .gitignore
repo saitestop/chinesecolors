@@ -1,1 +1,5 @@
 /build
+/.gradle
+/.idea
+/chinesecolors.iml
+/chinesecolors-master.iml

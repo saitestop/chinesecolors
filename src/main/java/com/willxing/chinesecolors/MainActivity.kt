@@ -7,16 +7,14 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.MotionEvent
-import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.LinearInterpolator
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.willxing.chinesecolors.animation.FloatArrayEvaluator
 import com.willxing.chinesecolors.animation.IntArrayEvaluator
 import com.willxing.chinesecolors.bean.ColorData
@@ -33,7 +31,7 @@ class MainActivity : Activity() {
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     private lateinit var listCView: ListCView
-    private lateinit var layout:ConstraintLayout
+    private lateinit var layout: ConstraintLayout
     private lateinit var select_color_text: TextView
     private lateinit var  select_color_pinyin_text:TextView
     private lateinit var  scrollTextView_r:ScrollTextView
@@ -41,6 +39,7 @@ class MainActivity : Activity() {
     private lateinit var  scrollTextView_b:ScrollTextView
 
     var currentBackgroundColor = Color.BLACK
+    var currentTextdColor = Color.BLACK
     var  CMYKCurrent:IntArray = IntArray(4)
 
     private val listColorData = ArrayList<ColorData>()
@@ -67,8 +66,11 @@ class MainActivity : Activity() {
 
     private fun initView() {
         scrollTextView_r = findViewById(R.id.scrolltext_r)
+//        scrollTextView_r.setTextColor(Color.RED)
         scrollTextView_g = findViewById(R.id.scrolltext_g)
+//        scrollTextView_g.setTextColor(Color.GREEN)
         scrollTextView_b =  findViewById(R.id.scrolltext_b)
+//        scrollTextView_b.setTextColor(Color.BLUE)
 
         select_color_text = findViewById(R.id.select_color_text)
         select_color_pinyin_text =findViewById(R.id.select_color_pinyin_text)
@@ -113,9 +115,12 @@ class MainActivity : Activity() {
         }
     }
 
+
     fun initAnimation(item: ColorData){
         var animatorForCMYK =   AnimationForCMYK(listCView.getCMYK(),item.CMYK)
         var animatorForBG = AnimationForBackground(currentBackgroundColor,Color.parseColor(item.hex))
+        var animatorForSelectText =  AnimationForText(currentTextdColor,Color.parseColor(item.hex),select_color_text)
+        var animatorForSelectTextPinyin =  AnimationForText(currentTextdColor,Color.parseColor(item.hex),select_color_pinyin_text)
         var animatorForSBC =  AnimationForStatuBarColor(currentBackgroundColor,Color.parseColor(item.hex))
 
         var offsetNextr = scrollTextView_r.offsetsInitByNum(item.RGB[0])
@@ -132,6 +137,8 @@ class MainActivity : Activity() {
                 .with(animatorForST_r)
                 .with(animatorForST_g)
                 .with(animatorForST_b)
+                .with(animatorForSelectText)
+                .with(animatorForSelectTextPinyin)
         animationSet.start()
     }
     //设置状态栏颜色动画
@@ -158,6 +165,40 @@ class MainActivity : Activity() {
 
             override fun onAnimationEnd(animation: Animator?) {
                 currentBackgroundColor = colorNext;
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+            }
+
+        })
+
+        return  colorAnim
+    }
+
+    fun reverseColor(color:Int):Int{
+        var red: Int = color shr 16 and 0x0ff
+        var green: Int = color shr 8 and 0x0ff
+        var blue: Int = color and 0x0ff
+
+        red = 255 - red
+        green = 255 - green
+        blue = 255 - blue
+        return Color.rgb(red, green, blue)
+    }
+
+    fun AnimationForText(colorCurrent:Int,colorNext:Int,item:TextView):ValueAnimator{
+        var   colorAnim: ValueAnimator = ObjectAnimator.ofInt(item,"TextColor", colorCurrent, reverseColor (colorNext));
+        colorAnim.setDuration(1000);
+        colorAnim.setEvaluator(ArgbEvaluator());
+        colorAnim.addListener(object : Animator.AnimatorListener{
+            override fun onAnimationRepeat(animation: Animator?) {
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                currentTextdColor = reverseColor (colorNext);
             }
 
             override fun onAnimationCancel(animation: Animator?) {

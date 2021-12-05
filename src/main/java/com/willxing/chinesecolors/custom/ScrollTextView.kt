@@ -10,14 +10,17 @@ class ScrollTextView : View {
     private val text: String = "0123456789012"
     private  val mPaint: Paint = Paint()
 
-
+    private var textColor:Int = Color.WHITE
     var offsets:FloatArray = FloatArray(3)
     var offsetStep = 0f;
     constructor(mContext: Context) : super(mContext) {
         initPaint()
     }
 
-
+    fun setTextColor(textColor:Int){
+        this.textColor = textColor
+        mPaint.setColor(textColor);
+    }
 
 
     constructor(mContext: Context, mAttributeSet: AttributeSet) : super(mContext, mAttributeSet){
@@ -27,7 +30,7 @@ class ScrollTextView : View {
     fun initPaint() {
         mPaint.setAntiAlias(true);// 抗锯齿效果
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(Color.WHITE);// 背景
+        mPaint.setColor(textColor);// 背景
     }
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
